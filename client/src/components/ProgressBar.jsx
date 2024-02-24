@@ -9,6 +9,7 @@ function ProgressBar() {
 
   console.log(data, "daata")
   return (
+    
     <div className='mb-6 w-full'>
        <div className='mt-8 mx-6'>
         <div className=' relative h-2.5 w-full rounded-2xl border border-gray-300'>
