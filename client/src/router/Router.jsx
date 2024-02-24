@@ -3,6 +3,7 @@ import App from '../App'
 import AboutUs from '../pages/AboutUs';
 import Home from '../pages/Home';
 import Events from '../pages/Events';
+import NGODonator from '../pages/NGODonator';
 
 const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
             {
                 path:'/events',
                 element:<Events/>
+            },
+            {
+                path:'/ngo-donator',
+                element:<NGODonator/>
             }
            
            
