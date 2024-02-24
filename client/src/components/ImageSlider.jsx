@@ -13,7 +13,7 @@ const ImageSlider = () => {
     {
       id:5,
       eventName: `Tribal Welfare`,
-      img: cause1,
+      img: "",
       requiredFund : 100000,
       gatheredFund: 50000,
       review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
@@ -21,7 +21,7 @@ const ImageSlider = () => {
     {
       id:1,
       eventName: `Education &  Literacy`,
-      img: cause2,
+      img: "",
       requiredFund : 100000,
       gatheredFund: 50000,
       review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
@@ -29,7 +29,7 @@ const ImageSlider = () => {
     {
       id:2,
       eventName: `Food & Agriculture`,
-      img: cause3,
+      img: "",
       requiredFund : 100000,
       gatheredFund: 50000,
       review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
@@ -37,7 +37,7 @@ const ImageSlider = () => {
     {
       id:3,
       eventName: `Oldage Home`,
-      img: cause4,
+      img: "",
       requiredFund : 100000,
       gatheredFund: 50000,
       review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
@@ -45,7 +45,7 @@ const ImageSlider = () => {
     {
       id:4,
       eventName: `Health & Nutrition`,
-      img: cause5,
+      img: "",
       requiredFund : 100000,
       gatheredFund: 50000,
       review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
