@@ -3,6 +3,7 @@ import ImageSlider from '../components/ImageSlider'
 
 
 function Home() {
+
   return (
     <section>
       <div className="mt-16">
@@ -14,8 +15,8 @@ function Home() {
         </h1>
       </div>
       <ImageSlider />
-      </section>
+    </section>
   )
 }
 
-export default Home
+export default Home;
