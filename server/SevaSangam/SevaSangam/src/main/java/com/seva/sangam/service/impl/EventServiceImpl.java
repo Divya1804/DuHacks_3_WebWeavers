@@ -35,5 +35,22 @@ public class EventServiceImpl implements EventServices {
 
         return model.map(event1, EventDto.class);
     }
+    @Override
+    public EventDto updateEvent(EventDto eventDto, Long ngoId, Long eventId) {
+        Event eve = eventRepo.findById(eventId).orElseThrow(() -> new ResourceNotFound("Event", "Id", eventId));
+
+        NgoAdmin ngo = ngoRepo.findById(ngoId).orElseThrow(() -> new ResourceNotFound("Ngo", "Id", ngoId));
+
+        eve.setNgoAdmin(ngo);
+        eve.setDetails(eventDto.getDetails());
+        eve.setEventName(eventDto.getEventName());
+        eve.setRequiredAmount(eventDto.getRequiredAmount());
+        eve.setType(eventDto.getType());
+        eve.setStartDate(eventDto.getStartDate());
+        eve.setEndDate(eventDto.getEndDate());
+
+        Event event = eventRepo.save(eve);
+        return model.map(event, EventDto.class);
+    }
 }
 
