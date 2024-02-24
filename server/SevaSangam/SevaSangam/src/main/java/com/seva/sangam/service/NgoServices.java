@@ -16,4 +16,6 @@ public interface NgoServices {
     HomeNgo homeNgo(Long ngoId);
 
     List<EventCard> getAllEventByNgoId(Long ngoId);
+
+    NgoAdminDto loginNgoAdmin(String userName, String password);
 }

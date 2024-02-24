@@ -182,6 +182,17 @@ public class NgoServiceImpl implements NgoServices {
     }
 
     @Override
+    public NgoAdminDto loginNgoAdmin(String username, String password) {
+        NgoAdmin ngoAdmin = ngoRepo.findNgoAdminByNgoUserNameAndNgoPassword(username, password);
+
+        if(ngoAdmin == null)
+        {
+            throw  new ResourceNotFound("username and password not found for ngo", "", Long.parseLong("-1"));
+        }
+        return model.map(ngoAdmin, NgoAdminDto.class);
+    }
+
+    @Override
     public NgoListPage getAllNgo(Integer pageNumber, Integer pageSize) {
         Pageable page = PageRequest.of(pageNumber, pageSize);
         Page<NgoAdmin> ngoAdmins = ngoRepo.findAll(page);
