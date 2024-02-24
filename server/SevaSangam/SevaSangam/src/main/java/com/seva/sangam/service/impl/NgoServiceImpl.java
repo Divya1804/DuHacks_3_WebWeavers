@@ -5,7 +5,7 @@ import com.seva.sangam.entity.NgoAdmin;
 import com.seva.sangam.entity.Payment;
 import com.seva.sangam.exception.ResourceNotFound;
 import com.seva.sangam.payload.*;
-import com.seva.sangam.payload.paging.NgoListPage;
+import com.seva.sangam.paging.NgoListPage;
 import com.seva.sangam.repository.EventRepo;
 import com.seva.sangam.repository.NgoRepo;
 import com.seva.sangam.service.NgoServices;
@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -139,9 +141,9 @@ public class NgoServiceImpl implements NgoServices {
         List<Payment> pay = new ArrayList<>();
         List<DonorListDto> dld = new ArrayList<>();
         List<Event> events = n1.getEventList();
-        for (Event i : events) {
+        for (Event i : events){
             pay = i.getPayments();
-            for (Payment p : pay) {
+            for (Payment p : pay){
                 DonorListDto donor = new DonorListDto();
 
                 donor.setEventId(i.getEventId());
@@ -157,6 +159,26 @@ public class NgoServiceImpl implements NgoServices {
                 dld.add(donor);
             }
         }
+
+        Collections.sort(dld, new Comparator<DonorListDto>() {
+            @Override
+            public int compare(DonorListDto donor1, DonorListDto donor2) {
+                // Compare the amounts in descending order
+                return donor2.getAmount().compareTo(donor1.getAmount());
+            }
+        });
+
+        ngo.setDonors(dld);
+        ngo.setEvCard(eventCards);
+        ngo.setPrEventCard(preventCards);
+        return ngo;
+    }
+
+    @Override
+    public List<EventCard> getAllEventByNgoId(Long ngoId) {
+        NgoAdmin ngoAdmin = ngoRepo.findById(ngoId).orElseThrow(() -> new ResourceNotFound("Ngo", "Id", ngoId));
+        List<Event> eve = eventRepo.findByNgoAdminOrderByStartDateDesc(ngoAdmin);
+        return EventToCard(eve);
     }
 
     @Override
