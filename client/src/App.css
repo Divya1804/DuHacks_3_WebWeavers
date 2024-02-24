@@ -1,0 +1,214 @@
+
+/* NGO Card */
+.single-job-items {
+    padding: 36px 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    transition: 0.4s;
+  }
+  
+  /* Media queries for smaller screen sizes */
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .single-job-items {
+      padding: 20px 7px;
+    }
+  }
+  
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    .single-job-items {
+      padding: 20px 25px;
+    }
+  }
+  
+  /* Specific styling for .single-job-items .company-img img */
+  .single-job-items .company-img img {
+    overflow: hidden;
+    float: left;
+    margin-right: 32px;
+    z-index: 999;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 767px) {
+    .single-job-items .job-tittle {
+      padding-top: 25px;
+    }
+  }
+  
+  /* Styling for job title links */
+  .single-job-items .job-tittle a h4 {
+    color: #28395a;
+    font-size: 24px;
+    transition: 0.4s;
+  }
+  
+  .single-job-items .job-tittle a h4:hover {
+    color: #8b92dd;
+  }
+  
+  /* Styling for job title list items */
+  .single-job-items .job-tittle ul li {
+    display: inline-block;
+    margin-right: 48px;
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.8;
+  }
+  
+  /* Media queries for different screen sizes */
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .single-job-items .job-tittle ul li {
+      margin-right: 18px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .single-job-items .job-tittle ul li {
+      margin-right: 0px;
+      margin-bottom: 7px;
+    }
+  }
+  
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    .single-job-items .job-tittle ul li {
+      margin-right: 8px;
+    }
+  }
+  
+  .single-job-items .job-tittle ul li:last-child {
+    margin-right: 0px;
+  }
+  
+  /* Styling when hovering over .single-job-items */
+  .single-job-items:hover {
+    box-shadow: 0px 22px 57px 0px rgba(34, 41, 72, 0.05);
+  }
+  
+  /* Additional styling for .job-items */
+  .single-job-items .job-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  /* Styling for .items-link */
+  .items-link {
+    padding-top: 35px;
+    text-align: center;
+  }
+  
+  .items-link a {
+    color: rgb(113, 128, 150);
+    display: block;
+    border: 1px solid rgb(113, 128, 150);
+    border-radius: 5px;
+    padding: 4px 12px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .items-link a {
+      padding: 4px 19px;
+    }
+  }
+  
+  .items-link a:hover {
+    color: #fff;
+    background: rgb(113, 128, 150);
+    border: 1px solid transparent;
+  }
+  
+  .items-link span {
+    color: #3575E2;
+    display: block;
+  }
+  
+  /* Media query for larger screen sizes */
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .items-link2 {
+      padding-top: 35px;
+      text-align: center;
+    }
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .items-link2 {
+      padding-top: 35px;
+      text-align: center;
+    }
+  }
+
+  .pagination-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font: 500;
+    font-size: 15px;
+  }
+
+  
+
+  /* sidebar */
+
+  
+.sidebar-label-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sidebar-label-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.sidebar-label-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.sidebar-label-container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.sidebar-label-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.sidebar-label-container .checkmark:after {
+  top: 6.4px;
+  left: 6.4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: white;
+}
+
+.registarion-page{
+
+  background-image: url('/frontend/public//images//Register-Background.png');
+}
