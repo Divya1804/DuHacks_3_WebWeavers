@@ -10,4 +10,5 @@ public interface EventServices {
     EventDto updateEvent(EventDto eventDto, Long eventId, Long ngoId);
 
     public List<EventCard> getAllUpComingEventCard();
+    EventCard getEventById(Long eid);
 }

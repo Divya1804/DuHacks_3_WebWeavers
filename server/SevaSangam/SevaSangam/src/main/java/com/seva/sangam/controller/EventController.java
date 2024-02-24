@@ -34,4 +34,11 @@ public class EventController {
     {
         return new ResponseEntity<List<EventCard>>(eventServices.getAllUpComingEventCard(), HttpStatus.ACCEPTED);
     }
+
+    //eventdetails by id
+    @GetMapping("/home/{eId}/")
+    public ResponseEntity<EventCard> getEventByID(@PathVariable("eId") Long eid)
+    {
+        return new ResponseEntity<EventCard>(eventServices.getEventById(eid), HttpStatus.ACCEPTED);
+    }
 }

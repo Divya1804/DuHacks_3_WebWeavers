@@ -85,5 +85,27 @@ public class EventServiceImpl implements EventServices {
 
         return list;
     }
+    @Override
+    public EventCard getEventById(Long eid) {
+        Event i= eventRepo.findById(eid).orElseThrow(() -> new ResourceNotFound("Event", "Id", eid));
+
+        EventCard ec = new EventCard();
+
+        ec.setEventId(i.getEventId());
+        ec.setEventName(i.getEventName());
+        ec.setLocation(i.getLocation());
+        ec.setDescription(i.getDetails());
+        ec.setNgoId(i.getNgoAdmin().getNgoId());
+        ec.setNgoName(i.getNgoAdmin().getNgoName());
+        ec.setPhotoLink(i.getPhoto());
+        ec.setStartDate(i.getStartDate());
+        ec.setEndDate(i.getEndDate());
+        ec.setRaisedFund(i.getGainedAmount());
+        ec.setRequiredFund(i.getRequiredAmount());
+        ec.setType(i.getType());
+        ec.setPublic_key(i.getNgoAdmin().getMerchantId());
+
+        return ec;
+    }
 }
 
