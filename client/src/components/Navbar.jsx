@@ -39,6 +39,8 @@ const Navbar = () => {
     { path: '/', title: 'Home' },
     { path: '/events', title: 'Events' },
     { path: '/ngo-donator', title: 'NGOs' },
+    { path: '/donator-profile', title: 'Donator Profile' },
+
     { path: '/aboutus', title: 'About us' },
   ];
 
