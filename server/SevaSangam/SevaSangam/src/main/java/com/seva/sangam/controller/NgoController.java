@@ -57,7 +57,7 @@ public class NgoController {
     }
 
     @GetMapping("/{username}/{password}")
-    private ResponseEntity<?> loginDonor(@PathVariable("username") String userName, @PathVariable("password") String password)
+    private ResponseEntity<?> loginNgo(@PathVariable("username") String userName, @PathVariable("password") String password)
     {
         NgoAdminDto ngoAdminDto= ngoServices.loginNgoAdmin(userName, password);
 
