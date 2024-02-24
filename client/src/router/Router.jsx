@@ -4,6 +4,7 @@ import AboutUs from '../pages/AboutUs';
 import Home from '../pages/Home';
 import Events from '../pages/Events';
 import NGODonator from '../pages/NGODonator';
+import DonatorProfile from '../pages/DonatorProfile';
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
             {
                 path:'/ngo-donator',
                 element:<NGODonator/>
-            }
+            },
+            {
+                path:"/donator-profile",
+                element:<DonatorProfile/>
+            },
            
            
         ]
