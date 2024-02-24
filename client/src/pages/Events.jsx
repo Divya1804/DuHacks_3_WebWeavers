@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {FiMapPin, FiSearch} from 'react-icons/fi'
-
 import EventList from '../components/EventList';
 import Pagination from '../components/Pagination';
 import EventCard from '../components/EventCard';
+import Sidebar from '../sidebar/Sidebar';
 
 
 function Events() {
@@ -28,7 +27,7 @@ function Events() {
     setSelectedCategory(event.target.value);
   };
 
-  console.log("sel",selectedCategory)
+//   console.log("sel",selectedCategory)
 
   const itemsPerPage = 6;
   const totalNoOfPages = Math.ceil(events.length /itemsPerPage);
@@ -52,7 +51,7 @@ function Events() {
         <div className='bg-[#FAFAFA] md:grid grid-cols-4 gap-8  px-4 py-12'>
           {/* left side */}
           <div className='bg-white  p-4 rounded'>
-            {/* <Sidebar  handleChange={handleChange}/> */}
+            <Sidebar  handleChange={handleChange}/>
           </div>
           
           <div className="col-span-3 bg-white p-4 rounded-sm">
