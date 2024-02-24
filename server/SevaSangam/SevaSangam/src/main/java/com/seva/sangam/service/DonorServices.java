@@ -1,6 +1,7 @@
 package com.seva.sangam.service;
 
 import com.seva.sangam.payload.DonorDto;
+import com.seva.sangam.payload.EventCard;
 import com.seva.sangam.payload.UpdateDonorDto;
 import com.seva.sangam.payload.UserById;
 
@@ -15,4 +16,5 @@ public interface DonorServices {
     UserById getDonatorProfileById(Long did, Integer pageNumber, Integer pageSize);
 
     DonorDto loginDonor(String username, String password);
+
 }

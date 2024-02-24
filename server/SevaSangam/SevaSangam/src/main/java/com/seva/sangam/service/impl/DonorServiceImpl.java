@@ -2,14 +2,13 @@ package com.seva.sangam.service.impl;
 
 
 import com.seva.sangam.entity.Donor;
+import com.seva.sangam.entity.Event;
 import com.seva.sangam.entity.Payment;
 import com.seva.sangam.exception.ResourceNotFound;
 import com.seva.sangam.paging.DonationDtoPage;
-import com.seva.sangam.payload.DonationDto;
-import com.seva.sangam.payload.DonorDto;
-import com.seva.sangam.payload.UpdateDonorDto;
-import com.seva.sangam.payload.UserById;
+import com.seva.sangam.payload.*;
 import com.seva.sangam.repository.DonorRepo;
+import com.seva.sangam.repository.EventRepo;
 import com.seva.sangam.repository.PaymentRepo;
 import com.seva.sangam.service.DonorServices;
 import org.modelmapper.ModelMapper;
@@ -20,12 +19,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class DonorServiceImpl implements DonorServices {
 
+    @Autowired
+    private EventRepo eventRepo;
     @Autowired
     private DonorRepo donorRepo;
 
@@ -131,5 +133,7 @@ public class DonorServiceImpl implements DonorServices {
 
         return model.map(donorDto,DonorDto.class);
     }
+
+
 
 }

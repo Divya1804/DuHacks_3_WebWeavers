@@ -4,6 +4,7 @@ package com.seva.sangam.service.impl;
 import com.seva.sangam.entity.Event;
 import com.seva.sangam.entity.NgoAdmin;
 import com.seva.sangam.exception.ResourceNotFound;
+import com.seva.sangam.payload.EventCard;
 import com.seva.sangam.payload.EventDto;
 import com.seva.sangam.repository.EventRepo;
 import com.seva.sangam.repository.NgoRepo;
@@ -12,6 +13,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -51,6 +55,35 @@ public class EventServiceImpl implements EventServices {
 
         Event event = eventRepo.save(eve);
         return model.map(event, EventDto.class);
+    }
+
+    @Override
+    public List<EventCard> getAllUpComingEventCard() {
+        List<Event> e = eventRepo.findByEndDateGreaterThanOrderByStartDateAsc(LocalDate.now());
+
+        List<EventCard> list = new ArrayList<>();
+        for(Event i : e)
+        {
+            EventCard ec = new EventCard();
+
+            ec.setEventId(i.getEventId());
+            ec.setEventName(i.getEventName());
+            ec.setLocation(i.getLocation());
+            ec.setDescription(i.getDetails());
+            ec.setNgoId(i.getNgoAdmin().getNgoId());
+            ec.setNgoName(i.getNgoAdmin().getNgoName());
+            ec.setPhotoLink(i.getPhoto());
+            ec.setStartDate(i.getStartDate());
+            ec.setEndDate(i.getEndDate());
+            ec.setRaisedFund(i.getGainedAmount());
+            ec.setRequiredFund(i.getRequiredAmount());
+            ec.setType(i.getType());
+            ec.setPublic_key(i.getNgoAdmin().getMerchantId());
+
+            list.add(ec);
+        }
+
+        return list;
     }
 }
 
