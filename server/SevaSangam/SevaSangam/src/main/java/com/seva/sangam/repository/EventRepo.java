@@ -11,4 +11,5 @@ public interface EventRepo extends JpaRepository<Event, Long> {
     List<Event> findByNgoAdminAndEndDateLessThanEqualOrderByStartDateDesc(NgoAdmin i, LocalDate now);
     List<Event> findByNgoAdminAndEndDateGreaterThanEqualOrderByStartDateAsc(NgoAdmin ngo, LocalDate now);
     List<Event> findByNgoAdminAndEndDateLessThanOrderByEndDateDesc(NgoAdmin ngo, LocalDate now);
+    List<Event> findByNgoAdminOrderByStartDateDesc(NgoAdmin ngoAdmin);
 }

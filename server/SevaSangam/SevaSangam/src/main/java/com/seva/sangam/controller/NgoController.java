@@ -1,14 +1,17 @@
 package com.seva.sangam.controller;
 
+import com.seva.sangam.payload.EventCard;
 import com.seva.sangam.payload.HomeNgo;
 import com.seva.sangam.payload.NgoAdminDto;
 import com.seva.sangam.payload.NgoById;
-import com.seva.sangam.payload.paging.NgoListPage;
+import com.seva.sangam.paging.NgoListPage;
 import com.seva.sangam.service.NgoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/ngo")
@@ -46,5 +49,10 @@ public class NgoController {
         return new ResponseEntity<HomeNgo>(ngoServices.homeNgo(ngoId), HttpStatus.OK);
     }
 
+    @GetMapping("/event/{ngoId}")
+    private ResponseEntity<?> getAllEventByNgoId(@PathVariable("ngoId") Long ngoId)
+    {
+        return new ResponseEntity<List<EventCard>>(ngoServices.getAllEventByNgoId(ngoId), HttpStatus.OK);
+    }
 
 }

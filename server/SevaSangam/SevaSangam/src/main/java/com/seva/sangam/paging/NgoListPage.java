@@ -1,4 +1,4 @@
-package com.seva.sangam.payload.paging;
+package com.seva.sangam.paging;
 
 
 import com.seva.sangam.payload.AllNgoInDonor;
