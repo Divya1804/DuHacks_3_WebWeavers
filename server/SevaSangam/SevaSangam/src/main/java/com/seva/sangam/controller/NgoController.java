@@ -1,4 +1,50 @@
 package com.seva.sangam.controller;
 
+import com.seva.sangam.payload.HomeNgo;
+import com.seva.sangam.payload.NgoAdminDto;
+import com.seva.sangam.payload.NgoById;
+import com.seva.sangam.payload.paging.NgoListPage;
+import com.seva.sangam.service.NgoServices;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/ngo")
 public class NgoController {
+
+    @Autowired
+    private NgoServices ngoServices;
+
+    @PostMapping("/")
+    private ResponseEntity<NgoAdminDto> createNgo(@RequestBody NgoAdminDto ngoAdminDto){
+        NgoAdminDto dto = ngoServices.createNgo(ngoAdminDto);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/ngoId/{ngoId}")
+    private ResponseEntity<?> ngoById(@PathVariable("ngoId") Long ngoId){
+        NgoById nbi = ngoServices.ngoById(ngoId);
+        return new ResponseEntity<NgoById>(nbi, HttpStatus.OK);
+    }
+
+    @PutMapping("/{ngoId}")
+    private ResponseEntity<NgoAdminDto> updateNgo(@RequestBody NgoAdminDto ngo, @PathVariable("ngoId") Long ngoId){
+        NgoAdminDto dto = ngoServices.updateNgo(ngo, ngoId);
+        return new ResponseEntity<>(dto, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/all/{pagenumber}/{pagesize}")
+    private ResponseEntity<NgoListPage> getAllNgo(@PathVariable("pagenumber") Integer pageNumber, @PathVariable("pagesize") Integer pageSize){
+        NgoListPage ngoListPage = ngoServices.getAllNgo(pageNumber, pageSize);
+        return new ResponseEntity<NgoListPage>(ngoListPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/home/{ngoId}/")
+    private ResponseEntity<?> homeNgo(@PathVariable("ngoId") Long ngoId){
+        return new ResponseEntity<HomeNgo>(ngoServices.homeNgo(ngoId), HttpStatus.OK);
+    }
+
+
 }
