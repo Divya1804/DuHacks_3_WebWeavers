@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -44,5 +46,6 @@ public class Donor {
     @Column(name = "photo_link")
     private String photoLink;
 
-
+    @OneToMany(mappedBy = "donor", cascade = CascadeType.ALL)
+    private List<Payment> payments;
 }

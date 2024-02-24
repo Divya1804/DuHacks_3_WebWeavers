@@ -47,6 +47,12 @@ public class Event {
     @Column(name="required_amount")
     private Long requiredAmount;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private NgoAdmin ngoAdmin;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<Payment> payments;
+
 
 }
 

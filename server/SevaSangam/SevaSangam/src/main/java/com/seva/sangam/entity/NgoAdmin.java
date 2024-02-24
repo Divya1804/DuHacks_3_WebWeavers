@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -46,6 +48,9 @@ public class NgoAdmin {
 
     @Column(name = "ngo_phoneno")
     private Long ngoPhoneNo;
+
+    @OneToMany(mappedBy = "ngoAdmin", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Event> eventList;
 
     private String merchantId;
     private String secretKey;
