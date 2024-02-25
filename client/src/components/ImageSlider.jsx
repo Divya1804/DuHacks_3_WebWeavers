@@ -8,44 +8,8 @@ import { Link } from "react-router-dom";
 import ProgressBar from "./ProgressBar";
 
 
-const ImageSlider = () => {
-  const data = [
-    {
-      id:5,
-      eventName: `Tribal Welfare`,
-      requiredFund : 100000,
-      gatheredFund: 50000,
-      review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
-    },
-    {
-      id:1,
-      eventName: `Education &  Literacy`,
-      requiredFund : 100000,
-      gatheredFund: 50000,
-      review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
-    },
-    {
-      id:2,
-      eventName: `Food & Agriculture`,
-      requiredFund : 100000,
-      gatheredFund: 50000,
-      review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
-    },
-    {
-      id:3,
-      eventName: `Oldage Home`,
-      requiredFund : 100000,
-      gatheredFund: 50000,
-      review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
-    },
-    {
-      id:4,
-      eventName: `Health & Nutrition`,
-      requiredFund : 100000,
-      gatheredFund: 50000,
-      review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,`,
-    },
-  ];
+const ImageSlider = (props) => {
+  const data = props.data;
 
   const settings = {
     dots: true,
@@ -71,7 +35,7 @@ const ImageSlider = () => {
   return (
     <div className="w-3/4 m-auto ">
     {/* see more detail */}
-    <Link to={`events`} className="flex justify-end "> 
+    <Link to={`/events`} className="flex justify-end "> 
     <button className="bg-transparent text-black px-4 py-2 rounded-md border border-gray-500 hover:bg-gray-600 hover:text-white">See More</button>
    </Link>
    
