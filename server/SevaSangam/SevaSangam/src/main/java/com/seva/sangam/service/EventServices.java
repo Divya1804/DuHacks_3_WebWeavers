@@ -13,4 +13,5 @@ public interface EventServices {
     public List<EventCard> getAllUpComingEventCard();
     EventCard getEventById(Long eid);
     EventNgoId ngoEvent(Long eId);
+    EventDto getEventById(Long eventId, Long ngoId);
 }

@@ -48,4 +48,10 @@ public class EventController {
         EventNgoId eni = eventServices.ngoEvent(eId);
         return new ResponseEntity<EventNgoId>(eni, HttpStatus.OK);
     }
+
+    @GetMapping("/ngo/{ngoId}/event/{eventId}")
+    private ResponseEntity<?> getEventById(@PathVariable("eventId") Long eventId, @PathVariable("ngoId") Long ngoId){
+        EventDto dto = eventServices.getEventById(eventId, ngoId);
+        return new ResponseEntity<EventDto>(dto, HttpStatus.ACCEPTED);
+    }
 }
