@@ -7,4 +7,5 @@ import java.util.List;
 public interface PaymentServices {
     PaymentDto createPayment(PaymentDto paymentDto, Long donorId, Long eventId);
     List<PaymentDto> getDonorPaymentHistory(Long donorId);
+    List<PaymentDto> getEventPaymentHistory(Long eventId);
 }

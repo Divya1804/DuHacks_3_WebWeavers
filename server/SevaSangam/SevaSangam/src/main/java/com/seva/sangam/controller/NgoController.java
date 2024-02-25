@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/ngo")
+@CrossOrigin
 public class NgoController {
 
     @Autowired
