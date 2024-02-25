@@ -9,6 +9,7 @@ import Login from '../pages/Login';
 import Registration from '../pages/Registration'
 import NGORegistration from '../pages/NGORegistration'
 import EventRegistration from '../pages/EventRegistration'
+import DonatorRegistration from '../pages/DonatorRegistration';
 
 const router = createBrowserRouter([
     {
@@ -56,5 +57,11 @@ const router = createBrowserRouter([
         path:"/event-registration",
         element:<EventRegistration/>
     },
+    {
+       
+            path:"/donator-registration",
+            element:<DonatorRegistration/>
+      
+    }
 ])
 export default router;
