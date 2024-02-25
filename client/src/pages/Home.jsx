@@ -3,7 +3,10 @@ import ImageSlider from '../components/ImageSlider'
 
 
 function Home() {
+  let backendUrl =import.meta.env.VITE_BACKEND_URL;
+  // console.log(backendUrl)
 
+  
   return (
     <section>
       <div className="mt-16">

@@ -40,7 +40,6 @@ const Navbar = () => {
     { path: '/events', title: 'Events' },
     { path: '/ngo-donator', title: 'NGOs' },
     { path: '/donator-profile', title: 'Donator Profile' },
-
     { path: '/aboutus', title: 'About us' },
   ];
 
