@@ -5,6 +5,10 @@ import Home from '../pages/Home';
 import Events from '../pages/Events';
 import NGODonator from '../pages/NGODonator';
 import DonatorProfile from '../pages/DonatorProfile';
+import Login from '../pages/Login';
+import Registration from '../pages/Registration'
+import NGORegistration from '../pages/NGORegistration'
+import EventRegistration from '../pages/EventRegistration'
 
 const router = createBrowserRouter([
     {
