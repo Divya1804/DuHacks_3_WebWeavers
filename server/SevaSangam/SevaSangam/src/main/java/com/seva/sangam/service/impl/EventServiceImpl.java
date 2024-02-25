@@ -147,5 +147,12 @@ public class EventServiceImpl implements EventServices {
 
         return eni;
     }
+    @Override
+    public EventDto getEventById(Long eventId, Long ngoId) {
+        Event eve = eventRepo.findById(eventId).orElseThrow(() -> new ResourceNotFound("Event", "Id", eventId));
+//        NgoAdmin ngo = ngoRepo.findById(ngoId).orElseThrow(() -> new ResourceNotFound("Ngo", "Id", ngoId));
+
+        return model.map(eve, EventDto.class);
+    }
 }
 
