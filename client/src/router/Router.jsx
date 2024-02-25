@@ -13,6 +13,7 @@ import DonatorRegistration from '../pages/DonatorRegistration';
 import NGODetail from '../pages/NGODetail';
 import UpdateDonatorProfile from '../pages/UpdateDonatorProfile';
 import UpdateNGO from '../pages/UpdateNGO';
+import NGOEventDetail from '../pages/NGOEventDetail';
 
 const router = createBrowserRouter([
     {
@@ -75,6 +76,11 @@ const router = createBrowserRouter([
     {
         path: "/ngo-detail/:id",
         element: <NGODetail />
-    }
+    },
+    {
+        path:"/ngo-event-detail/:id",
+        element:<NGOEventDetail/>
+    },  
+
 ])
 export default router;

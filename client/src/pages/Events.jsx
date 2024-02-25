@@ -1,42 +1,78 @@
 import React, { useEffect, useState } from 'react'
+import {FiMapPin, FiSearch} from 'react-icons/fi'
+import Sidebar from '../slider/Sidebar';
 import EventList from '../components/EventList';
 import Pagination from '../components/Pagination';
 import EventCard from '../components/EventCard';
-import Sidebar from '../sidebar/Sidebar';
+import axios from 'axios';
 
 
 function Events() {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState({
+    type :'all',
+    location:'all',
+    date:'all'
+  });
+
   const [events , setEvents] =  useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage ,setCurrentPage] = useState(1);
-
-
-
+  const [data,setData] = useState([]);
+  const [changeData, setChangeData] = useState(false);
+  let FilterData = [];
+  
   useEffect(()=> {
-    setIsLoading(true);
-    fetch("jobs.json").then(res => res.json()).then(data => {
-      setEvents(data);
-      setIsLoading(false);
-    })
+    setIsLoading(false);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://192.168.27.67:8000/api/home/');
+        // console.log(response.data)
+        setEvents(response.data);
+        setData(response.data);
+        FilterData =  events;
+        
+      } catch (error) {
+      
+        console.log(error);
+      }
+    };
+
+    fetchData();
   },[])
+  
+  useEffect(()=>{
+    FilterData = events.filter((x) => {
+      if (
+        (x.location.toLowerCase() === selectedCategory.location || selectedCategory.location === 'all') &&
+        (x.type.toLowerCase() === selectedCategory.type || selectedCategory.type === 'all') &&
+        ((x.startDate.toLowerCase() >= selectedCategory.date && x.endDate.toLowerCase() <= selectedCategory.date) || selectedCategory.date === 'all')
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });   
+    setData(FilterData);
+  },[changeData])
+  
 
   //radio based filtering
-  const handleChange = (event) => {
-    // console.log("*********",event.target.value)
-    setSelectedCategory(event.target.value);
+  const handleChange = (event,data1) => {
+    
+   setSelectedCategory({...selectedCategory , [event.target.name]:event.target.value});
+   
   };
-
-//   console.log("sel",selectedCategory)
+  
+  // console.log(selectedCategory)
 
   const itemsPerPage = 6;
   const totalNoOfPages = Math.ceil(events.length /itemsPerPage);
  
   //filterning on so many things
   const filterData = (events) =>{
-    return events.map((data,i) => {
+    return data.map((data,i) => {
       if( i <itemsPerPage *currentPage && i >= itemsPerPage*(currentPage-1) ){
-        return (<EventCard key={i} data={data}/>)
+        return (<EventCard key={i} data={FilterData}/>)
     }})
   }
 
@@ -51,14 +87,14 @@ function Events() {
         <div className='bg-[#FAFAFA] md:grid grid-cols-4 gap-8  px-4 py-12'>
           {/* left side */}
           <div className='bg-white  p-4 rounded'>
-            <Sidebar  handleChange={handleChange}/>
+            <Sidebar changeData={changeData} setChangeData={setChangeData}  handleChange={handleChange} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} />
           </div>
           
           <div className="col-span-3 bg-white p-4 rounded-sm">
             {isLoading ? (
               <p className="font-medium">Loading...</p>
             ) : result.length > 0 ? (
-               <div> 
+               <div>
                  <div>
                     <EventList result={result} />
                     <Pagination  pages={totalNoOfPages} setCurrentPage={setCurrentPage}/>
