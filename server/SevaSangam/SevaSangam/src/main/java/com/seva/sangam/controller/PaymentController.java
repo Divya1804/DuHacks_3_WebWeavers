@@ -29,4 +29,10 @@ public class PaymentController {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
+    @GetMapping("/event/{eventId}")
+    private ResponseEntity<?> getEventPaymentHistory(@PathVariable("eventId") Long eventId){
+        List<PaymentDto> dtos = paymentServices.getEventPaymentHistory(eventId);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
 }

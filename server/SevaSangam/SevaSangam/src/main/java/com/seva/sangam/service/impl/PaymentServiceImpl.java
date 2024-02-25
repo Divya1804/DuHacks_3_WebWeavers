@@ -70,4 +70,13 @@ public class PaymentServiceImpl implements PaymentServices {
 
         return list.stream().map(pay -> model.map(pay, PaymentDto.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<PaymentDto> getEventPaymentHistory(Long eventId) {
+
+        Event event = eventRepo.findById(eventId).orElseThrow(() -> new ResourceNotFound("Event" , "Id" , eventId));
+        List<Payment> list = paymentRepo.findPaymentByEvent(event);
+
+        return list.stream().map(pay -> model.map(pay, PaymentDto.class)).collect(Collectors.toList());
+    }
 }
