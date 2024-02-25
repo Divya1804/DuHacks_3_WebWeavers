@@ -2,6 +2,7 @@ package com.seva.sangam.service;
 
 import com.seva.sangam.payload.EventCard;
 import com.seva.sangam.payload.EventDto;
+import com.seva.sangam.payload.EventNgoId;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface EventServices {
 
     public List<EventCard> getAllUpComingEventCard();
     EventCard getEventById(Long eid);
+    EventNgoId ngoEvent(Long eId);
+    EventDto getEventById(Long eventId, Long ngoId);
 }

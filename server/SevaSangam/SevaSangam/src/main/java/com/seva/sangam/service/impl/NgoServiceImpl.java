@@ -242,4 +242,36 @@ public class NgoServiceImpl implements NgoServices {
         ec.setPublic_key(i.getNgoAdmin().getMerchantId());
         return ec;
     }
+
+    @Override
+    public List<AllNgoInDonor> getAllNgo() {
+        //Sort sort = Sort.by("date").descending();
+//        Pageable page = PageRequest.of(pageNumber, pageSize);
+//        List<Payment> p=d1.getPayments();
+//        Page<NgoAdmin> ngoAdmins = ngoRepo.findAll(page);
+//        NgoListPage ngoListPage = new NgoListPage();
+        List<NgoAdmin> list = ngoRepo.findAll();
+
+        List<AllNgoInDonor> allList= new ArrayList<>();
+
+        for(NgoAdmin i: list)
+        {
+            AllNgoInDonor ngo=new AllNgoInDonor();
+
+            ngo.setNgoName(i.getNgoName());
+            ngo.setNgoId(i.getNgoId());
+            ngo.setSlogan(i.getSlogan());
+            ngo.setLocation(i.getLocation());
+            ngo.setPhoneNo(i.getNgoPhoneNo());
+
+            ngo.setLogo(i.getLogoLink());
+
+            List<Event> e = eventRepo.findByNgoAdminAndEndDateLessThanEqualOrderByStartDateDesc(i, LocalDate.now());
+            int p =  e.size();
+            ngo.setTotalPreEvent((long) p);
+
+            allList.add(ngo);
+        }
+        return allList;
+    }
 }

@@ -1,10 +1,7 @@
 package com.seva.sangam.controller;
 
 import com.seva.sangam.exception.ResourceNotFound;
-import com.seva.sangam.payload.EventCard;
-import com.seva.sangam.payload.HomeNgo;
-import com.seva.sangam.payload.NgoAdminDto;
-import com.seva.sangam.payload.NgoById;
+import com.seva.sangam.payload.*;
 import com.seva.sangam.paging.NgoListPage;
 import com.seva.sangam.service.NgoServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +63,13 @@ public class NgoController {
             return new ResponseEntity<Long>(ngoAdminDto.getNgoId(), HttpStatus.ACCEPTED);
         }
         throw  new ResourceNotFound("username and password not found for ngo", "", Long.parseLong("-1"));
+    }
+
+    @GetMapping("/all")
+    private ResponseEntity<List<AllNgoInDonor>> getAllNgo(){
+        System.out.println("getallngo");
+        List<AllNgoInDonor> allNgoInDonors = ngoServices.getAllNgo();
+        return new ResponseEntity<List<AllNgoInDonor>>(allNgoInDonors, HttpStatus.OK);
     }
 
 }
