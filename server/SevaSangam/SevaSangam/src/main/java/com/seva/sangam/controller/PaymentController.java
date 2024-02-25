@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/payment")
 @CrossOrigin
@@ -19,6 +21,12 @@ public class PaymentController {
     private ResponseEntity<?> createPayment(@RequestBody PaymentDto paymentDto, @PathVariable("donorId") Long donorId, @PathVariable("eventId") Long eventId){
         PaymentDto dto = paymentServices.createPayment(paymentDto, donorId, eventId);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/donor/{donorId}")
+    private ResponseEntity<?> getDonorPaymentHistory(@PathVariable("donorId") Long donorId){
+        List<PaymentDto> dtos = paymentServices.getDonorPaymentHistory(donorId);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
 }

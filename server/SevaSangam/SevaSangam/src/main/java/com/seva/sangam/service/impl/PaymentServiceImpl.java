@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PaymentServiceImpl implements PaymentServices {
@@ -58,5 +60,14 @@ public class PaymentServiceImpl implements PaymentServices {
 
 
         return model.map(pay1, PaymentDto.class);
+    }
+
+    @Override
+    public List<PaymentDto> getDonorPaymentHistory(Long donorId) {
+
+        Donor donor = donorRepo.findById(donorId).orElseThrow(() -> new ResourceNotFound("Donor", "Id", donorId));
+        List<Payment> list = paymentRepo.findPaymentByDonor(donor);
+
+        return list.stream().map(pay -> model.map(pay, PaymentDto.class)).collect(Collectors.toList());
     }
 }
