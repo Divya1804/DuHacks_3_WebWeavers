@@ -69,8 +69,9 @@ public class StripeController {
     private void init(Long ngoId) {
 
         Optional<NgoAdmin> ngoAdminDto = ngoRepo.findById(ngoId);
-        Stripe.apiKey ="sk_test_51OegoCSHej2iRk34siTTwBhSn8X9M2TpJj6Fgf3bNilMvB4PWXU1mYKbUeAih47JM6uHoYVDtdgCBs6I8lxjc0A700uJXJ2ssM";
-
+//        Stripe.apiKey ="sk_test_51OegoCSHej2iRk34siTTwBhSn8X9M2TpJj6Fgf3bNilMvB4PWXU1mYKbUeAih47JM6uHoYVDtdgCBs6I8lxjc0A700uJXJ2ssM";
+//        Stripe.apiKey ="sk_test_51OegoCSHej2iRk34siTTwBhSn8X9M2TpJj6Fgf3bNilMvB4PWXU1mYKbUeAih47JM6uHoYVDtdgCBs6I8lxjc0A700uJXJ2ssM";
+        Stripe.apiKey = ngoAdminDto.get().getSecretKey();
     }
 }
 
