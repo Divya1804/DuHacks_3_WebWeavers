@@ -64,7 +64,7 @@ const EventRegistration = () => {
           requiredAmount: formData.requiredAmount,
         }
         console.log(eventdata);
-        const response = await axios.post(`http://192.168.27.67:8000/api/ngo/${user.userId}/event`, eventdata);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/${user.userId}/event`, eventdata);
         setFormData(
           {
             eventName: "",
@@ -94,7 +94,7 @@ const EventRegistration = () => {
           requiredAmount: formData.requiredAmount,
           
         }
-        const response = await axios.post(`http://192.168.27.67:8000/api/ngo/${user.userId}/event`, eventdata);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/${user.userId}/event`, eventdata);
         console.log(response);
         setFormData(
           {

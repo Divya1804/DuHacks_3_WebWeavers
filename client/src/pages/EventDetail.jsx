@@ -21,7 +21,7 @@ function EventDetail() {
   useEffect(()=>{
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://192.168.27.67:8000/api/home/${id}/`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/home/${id}/`);
         
         console.log(response.data);
         setData(response.data);

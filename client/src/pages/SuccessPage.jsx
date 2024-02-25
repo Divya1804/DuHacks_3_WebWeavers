@@ -32,7 +32,7 @@ const SuccessPage = () => {
       "Content-Type":"application/json"
   }
     const createPayment = async()=>{
-      const response = await fetch(`http://192.168.27.67:8000/api/payment/event/${urlSegments[4]}/donor/${urlSegments[5]}`,{
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/payment/event/${urlSegments[4]}/donor/${urlSegments[5]}`,{
         method:"POST",
         headers:headers,
         body:JSON.stringify(body)

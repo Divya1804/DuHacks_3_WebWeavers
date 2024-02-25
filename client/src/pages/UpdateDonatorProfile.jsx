@@ -21,7 +21,7 @@ function UpdateDonatorProfile() {
 
   useEffect(()=>{
     const fetchDetailOfDonator =  async()=>{
-      const response = await axios.get(`http://192.168.27.67:8000/api/donor/${id}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/donor/${id}`);
 
       console.log(response)
       setFormData({
@@ -47,7 +47,7 @@ function UpdateDonatorProfile() {
   const handleSubmit = async () => {
     try {
       console.log(formData);
-      const response = await axios.put(`http://192.168.27.67:8000/api/donor/${id}`,  formData); // api
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/donor/${id}`,  formData); // api
 
       console.log("Donator Update that profile successfully:", response.data);
       setFormData({

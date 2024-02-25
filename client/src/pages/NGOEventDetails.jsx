@@ -25,7 +25,7 @@ function NGOEventDetail() {
   useEffect(()=>{
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://192.168.27.67:8000/api/${id}/`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/${id}/`);
           console.log("id",id);
         console.log("id2",response.data);
         setData(response.data);
@@ -95,7 +95,7 @@ function NGOEventDetail() {
 
 
         <div className='mt-10 lg:mx-24 md:mx-24 mx-auto'>
-            <h3 className='sm:text-5xl text-3xl mb-6 text-gray-500 font-bold flex justify-center '>HIGHEST  CONTRIBUTER</h3>
+            <h3 className='sm:text-5xl text-3xl mb-6 text-gray-500 font-bold flex justify-center '> CONTRIBUTER</h3>
             {/* iterating here using loop pass value to the props */}
              { console.log("data",data.donors)}
             {data.donors.map((x)=>{

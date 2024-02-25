@@ -7,7 +7,8 @@ const DonatorProfile = () => {
     const [index , setIndex] = useState(0);
     let  user  = useSelector(state=>state.user);
 
-
+    let backendUrl =import.meta.env.VITE_BACKEND_URL;
+    
     const navigate = useNavigate();
 
     const [userData, setUserData] = useState({
@@ -40,7 +41,7 @@ const DonatorProfile = () => {
       }, []);
     useEffect(() => {
         // Example API call using fetch
-        fetch(`http://192.168.27.67:8000/api/donor/profile/${user.userId}/${index}/4`)
+        fetch(`${backendUrl}/api/donor/profile/${user.userId}/${index}/4`)
             .then(response => response.json())
             .then(data => {
                 setUserData(data)

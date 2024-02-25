@@ -22,7 +22,7 @@ function NGOHome() {
    useEffect(()=>{
       const fetchData = async () => {
          try {
-           const response = await axios.get(`http://192.168.27.67:8000/api/ngo/home/${user.userId}/`);
+           const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/home/${user.userId}/`);
            setData(response.data.evCard);
            setTopDonator(response.data.donors)
            console.log("response",response.data);

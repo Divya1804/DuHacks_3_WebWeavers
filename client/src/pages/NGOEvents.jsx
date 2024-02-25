@@ -31,7 +31,7 @@ function NGOEvents() {
       try {
         console.log("user id ",user.userId);
       
-        const response = await axios.get(`http://192.168.27.67:8000/api/ngo/event/${user.userId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/event/${user.userId}`);
         
         setEvents(response.data);
         console.log("here",response.data);

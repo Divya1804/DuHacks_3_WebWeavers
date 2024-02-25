@@ -60,6 +60,7 @@ function Navbar() {
       { path: '/ngo', title: 'Home' },
       { path: '/ngo-events', title: 'Events' },
       {path:'/event-registration',title:'Post Event'},
+      {path:'/update-ngo-detail',title:'Update Detail'},
       { path: '/aboutus', title: 'About us' },
       
     ];

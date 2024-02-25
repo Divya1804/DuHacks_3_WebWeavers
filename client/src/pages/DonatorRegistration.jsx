@@ -26,7 +26,7 @@ function DonatorRegistration() {
   const handleSubmit = async () => {
     try {
       console.log(formData);
-      const response = await axios.put(`http://192.168.27.67:8000/api/donor/${id}`,  formData);
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/donor/${id}`,  formData);
       console.log("Donator registered successfully:", response.data);
       setFormData({
         donorName: "",

@@ -33,7 +33,7 @@ function Login() {
     try {
       let response;
       if(data.mode === 'donator'){
-        fetch(`http://192.168.27.67:8000/api/donor/${data.username}/${data.password}`).then(res=>res.json()).then(async (data)=>{
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/donor/${data.username}/${data.password}`).then(res=>res.json()).then(async (data)=>{
           localStorage.setItem('mode','donator');
           console.log("here",data);
           if(data.success === false){
@@ -67,7 +67,7 @@ function Login() {
       //  response =  axios.get(`http://192.168.27.67:8000/api/donor/${data.username}/${data.password}`)s
        
       } else if(data.mode === "ngo") {
-        fetch(`http://192.168.27.67:8000/api/ngo/${data.username}/${data.password}`).then(res=>res.json()).then(async (data)=>{
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/${data.username}/${data.password}`).then(res=>res.json()).then(async (data)=>{
           localStorage.setItem('mode','ngo');
           console.log("here",data);
           if(data.success === false){

@@ -45,7 +45,7 @@ const [formData, setFormData] = useState({
     try {
         console.log(formData);
       // Submit form data using Axios post request
-      const response = await axios.put(`http://192.168.27.67:8000/api/ngo/${id}`, formData);
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/${id}`, formData);
       console.log('Registration successful:', response.data);
       // Clear form fields after successful submission if needed
       setFormData({

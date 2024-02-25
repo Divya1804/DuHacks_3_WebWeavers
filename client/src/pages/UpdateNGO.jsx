@@ -22,7 +22,7 @@ function UpdateNGO() {
   useEffect(()=>{
     console.log("id",id);
      const fetchDetail=  async ()=>{
-        const response = await axios.get(`http://192.168.27.67:8000/api/ngo/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/${id}`);
 
         console.log("first response ", response);
         setFormData({
@@ -58,7 +58,7 @@ function UpdateNGO() {
       console.log(formData);
       // Submit form data using Axios post request
       const response = await axios.put(
-       `http://192.168.27.67:8000/api/ngo/${id}`,
+       `${import.meta.env.VITE_BACKEND_URL}/api/ngo/${id}`,
         formData
       );
       console.log("Update successfully:", response.data);
@@ -75,7 +75,7 @@ function UpdateNGO() {
         secretKey: "",
       });
 
-      navigate("/");
+      navigate("/ngo");
     } catch (error) {
       console.error("updatation failed:", error);
     }

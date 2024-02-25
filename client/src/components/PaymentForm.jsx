@@ -34,7 +34,7 @@ const PaymentForm = (props) => {
     const headers = {
         "Content-Type":"application/json"
     }
-    const response = await fetch(`http://192.168.27.67:8000/api/payment/${props.data.eventId}/${user.userId}/${props.data.ngoId}`,{
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/payment/${props.data.eventId}/${user.userId}/${props.data.ngoId}`,{
         method:"POST",
         headers:headers,
         body:JSON.stringify(paymentInfo)

@@ -23,7 +23,7 @@ function NGODonator() {
     useEffect(()=>{
         const fetchData = async () => {
             try {
-              const response = await axios.get(`http://192.168.27.67:8000/api/ngo/all`);
+              const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/all`);
               setNGOs(response.data);
               console.log("here",response.data);
             } catch (error) {

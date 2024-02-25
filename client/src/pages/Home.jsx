@@ -24,7 +24,7 @@ function Home() {
       if (user.userId !== '') { // Only fetch data if user is logged in
         const fetchData = async () => {
           try {
-            const response = await axios.get('http://192.168.27.67:8000/api/home/');
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/home/`);
             setData(response.data);
             setLoading(false); // Set loading to false when data is fetched
           } catch (error) {

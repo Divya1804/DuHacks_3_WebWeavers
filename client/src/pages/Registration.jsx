@@ -42,7 +42,7 @@ function Registration() {
             password:formData.password,
             email:formData.email 
         };
-        const response = await axios.post(`http://192.168.27.67:8000/api/donor/`, donorDto);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/donor/`, donorDto);
         console.log('Response:', response.data);
         // Reset form fields after successful submission if needed
         setFormData({
@@ -61,7 +61,7 @@ function Registration() {
             ngoPassword:formData.confirmPassword,
             ngoEmail: formData.email,
         };
-        const response = await axios.post(`http://192.168.27.67:8000/api/ngo/`, ngoAdminDto);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/`, ngoAdminDto);
         console.log('Response:', response.data);
         // Reset form fields after successful submission if needed
         setFormData({

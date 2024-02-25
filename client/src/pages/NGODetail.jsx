@@ -19,7 +19,7 @@ function NGODetail() {
   useEffect(()=>{
     const fetchData = async () => {
         try {
-          const response = await axios.get(`http://192.168.27.67:8000/api/ngo/ngoId/${id}`);
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/ngoId/${id}`);
           setData(response.data);
           console.log("here",response.data);
         } catch (error) {
