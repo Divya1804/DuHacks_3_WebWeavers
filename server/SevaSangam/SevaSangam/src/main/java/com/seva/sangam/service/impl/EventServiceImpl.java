@@ -3,9 +3,12 @@ package com.seva.sangam.service.impl;
 
 import com.seva.sangam.entity.Event;
 import com.seva.sangam.entity.NgoAdmin;
+import com.seva.sangam.entity.Payment;
 import com.seva.sangam.exception.ResourceNotFound;
+import com.seva.sangam.payload.DonorListDto;
 import com.seva.sangam.payload.EventCard;
 import com.seva.sangam.payload.EventDto;
+import com.seva.sangam.payload.EventNgoId;
 import com.seva.sangam.repository.EventRepo;
 import com.seva.sangam.repository.NgoRepo;
 import com.seva.sangam.service.EventServices;
@@ -106,6 +109,43 @@ public class EventServiceImpl implements EventServices {
         ec.setPublic_key(i.getNgoAdmin().getMerchantId());
 
         return ec;
+    }
+
+    @Override
+    public EventNgoId ngoEvent(Long eId) {
+        Event eve = eventRepo.findById(eId).orElseThrow(() -> new ResourceNotFound("Event", "Id", eId));
+
+        EventNgoId eni = new EventNgoId();
+
+        eni.setDescription(eve.getDetails());
+        eni.setEventName(eve.getEventName());
+        eni.setPhoto(eve.getPhoto());
+        eni.setEId(eId);
+        eni.setStartDate(eve.getStartDate());
+        eni.setEndDate(eve.getEndDate());
+        eni.setRequiredAmount(eve.getRequiredAmount());
+        eni.setGainedAmount(eve.getGainedAmount());
+        List<DonorListDto> dld = new ArrayList<>();
+        List<Payment> pay = eve.getPayments();
+
+        for (Payment i : pay){
+
+            DonorListDto dld1 = new DonorListDto();
+            dld1.setDate(i.getDate());
+            dld1.setAmount(i.getAmount());
+            dld1.setDonorName(i.getDonor().getDonorName());
+            dld1.setEventName(eve.getEventName());
+            dld1.setEmail(i.getDonor().getEmail());
+            dld1.setEventId(eId);
+            dld1.setPhotoLink(i.getDonor().getPhotoLink());
+            dld1.setPhone(i.getDonor().getPhoneNo());
+            dld1.setNgoId(eve.getNgoAdmin().getNgoId());
+            dld.add(dld1);
+        }
+
+        eni.setDonors(dld);
+
+        return eni;
     }
 }
 
