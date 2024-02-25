@@ -58,7 +58,7 @@ function Events() {
             {isLoading ? (
               <p className="font-medium">Loading...</p>
             ) : result.length > 0 ? (
-               <div>
+               <div> 
                  <div>
                     <EventList result={result} />
                     <Pagination  pages={totalNoOfPages} setCurrentPage={setCurrentPage}/>

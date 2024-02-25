@@ -12,6 +12,7 @@ import EventRegistration from '../pages/EventRegistration'
 import DonatorRegistration from '../pages/DonatorRegistration';
 import NGODetail from '../pages/NGODetail';
 import UpdateDonatorProfile from '../pages/UpdateDonatorProfile';
+import UpdateNGO from '../pages/UpdateNGO';
 
 const router = createBrowserRouter([
     {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
     {
         path:"/update-donator-profile/:id",
         element:<UpdateDonatorProfile/>
+    },
+    {
+        path:"/update-ngo-detail/:id",
+        element:<UpdateNGO/>
     },
     {
         path: "/ngo-detail/:id",
