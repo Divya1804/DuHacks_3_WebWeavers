@@ -41,7 +41,7 @@ public class Donor {
     private String address;
 
     @Column(name = "paid_amount")
-    private Long amount;
+    private Long amount= 0L;
 
     @Column(name = "photo_link")
     private String photoLink;

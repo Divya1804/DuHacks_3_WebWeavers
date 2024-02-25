@@ -42,10 +42,10 @@ public class Event {
     private LocalDate endDate;
 
     @Column(name="gained_amount")
-    private Long gainedAmount;
+    private Long gainedAmount= 0L;
 
     @Column(name="required_amount")
-    private Long requiredAmount;
+    private Long requiredAmount=0L;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private NgoAdmin ngoAdmin;
