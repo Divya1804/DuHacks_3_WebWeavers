@@ -3,13 +3,19 @@ import ImageSlider from "../components/ImageSlider";
 import EventCardList from "../components/EventCardList";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 
 function NGODetail() {
   let {id} = useParams();
   const [data,setData] = useState();
-
-  
+  let user =  useSelector(state => state.user);
+  useEffect(() => {
+        
+    // Check if user is logged in after Redux state is updated
+  if ( !user.userId  || user.mode !== 'donator') {
+      navigate('/login');
+    }
+  }, []);
   useEffect(()=>{
     const fetchData = async () => {
         try {

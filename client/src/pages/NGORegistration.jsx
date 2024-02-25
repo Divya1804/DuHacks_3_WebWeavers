@@ -1,6 +1,72 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function NGORegistration() {
+let navigate = useNavigate();
+let {id}=useParams();
+
+  let user =  useSelector(state => state.user);
+    useEffect(() => {
+      
+      // Check if user is logged in after Redux state is updated
+    if ( !user.userId  || user.mode !== 'ngo') {
+        navigate('/login');
+      }
+    }, []);
+
+const [formData, setFormData] = useState({
+    ngoName: '',
+    slogan: '',
+    location: '',
+    certiLink: '',
+    logoLink: '',
+    about: '',
+    ngoPhoneNo: '',
+    merchantId:'',
+    secretKey:'',
+    payEmail:'',
+    payPhoneNo:'',
+  });
+
+  // Handler for input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  // Handler for form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        console.log(formData);
+      // Submit form data using Axios post request
+      const response = await axios.put(`http://192.168.27.67:8000/api/ngo/${id}`, formData);
+      console.log('Registration successful:', response.data);
+      // Clear form fields after successful submission if needed
+      setFormData({
+        ngoName: '',
+    slogan: '',
+    location: '',
+    certiLink: '',
+    logoLink: '',
+    about: '',
+    ngoPhoneNo: '',
+    merchantId:'',
+    secretKey:'',
+    payEmail:'',
+    payPhoneNo:'',
+      });
+      navigate(`/`)
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
+  };
+
   return (
     <section className="py-1 ">
     <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
@@ -20,10 +86,10 @@ function NGORegistration() {
            
               <div className="w-full lg:w-12/12 px-4">
                 <div className="relative w-full mb-3">
-                <label className="block uppercase text-xs font-bold mb-2" htmlFor="grid-password">
+                <label className="block uppercase text-xs font-bold mb-2" htmlFor="grid-password ">
                   Name
                 </label>
-                  <input type="text" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Jyoti Healthcare' value="" />
+                  <input type="text" name='ngoName' value={formData.ngoName} onChange={handleChange}className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Jyoti Healthcare'  />
                 </div>
               </div>
               
@@ -32,7 +98,7 @@ function NGORegistration() {
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                      Logo Link
                   </label>
-                  <input type="url" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='https://ngoPic.com' value="" />
+                  <input type="url" name='logoLink' value={formData.logoLink} onChange={handleChange} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='https://ngoPic.com'  />
                 </div>
               </div>
               <div className="w-full lg:w-6/12 px-4">
@@ -40,7 +106,7 @@ function NGORegistration() {
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                      Certificate Link
                   </label>
-                  <input type="link" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='https://pic1.jpg' value=""/>
+                  <input type="link" name='certiLink' value={formData.certiLink} onChange={handleChange} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='https://pic1.jpg' />
                 </div>
               </div>
 
@@ -49,7 +115,7 @@ function NGORegistration() {
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                     Slogan
                   </label>
-                  <input type="text" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Write Something...' value=""/>
+                  <input type="text" name='slogan' value={formData.slogan} onChange={handleChange} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Write Something...'/>
                 </div>
               </div>
 
@@ -66,7 +132,7 @@ function NGORegistration() {
                 <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                   Location
                 </label>
-                <input type="text" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Mahesana' value=""/>
+                <input type="text" name='location' value={formData.location} onChange={handleChange} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Mahesana' />
               </div>
             </div>
             <div className="w-full lg:w-6/12 px-4">
@@ -74,7 +140,7 @@ function NGORegistration() {
                 <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                   Contact No
                 </label>
-                <input type="number" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='+91 484933 90238' value=""/>
+                <input type="number" name='ngoPhoneNo' value={formData.ngoPhoneNo} onChange={handleChange} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='+91 484933 90238' />
               </div>
             </div>
             
@@ -90,7 +156,7 @@ function NGORegistration() {
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
                     Merchant ID
                   </label>
-                  <input type="text" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Enter your Merchant ID' value="" />
+                  <input type="text" name='merchantId' value={formData.merchantId}onChange={handleChange}className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Enter your Merchant ID'/>
                 </div>
               </div>
               <div className="w-full lg:w-6/12 px-4">
@@ -98,7 +164,23 @@ function NGORegistration() {
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                     secret Key
                   </label>
-                  <input type="link" className="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Enter Your Secret Key' value=""/>
+                  <input type="link" name='secretKey'  value={formData.secretKey} onChange={handleChange} className="border-0 px-3 py-3 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Enter Your Secret Key' />
+                </div>
+              </div>
+              <div className="w-full lg:w-6/12 px-4">
+                <div className="relative w-full mb-3">
+                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                    Payment Email
+                  </label>
+                  <input type="text" name='payEmail' value={formData.payEmail} onChange={handleChange} className="border-0 px-3 py-3 placeholder-blueGray-300 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='Enter your Payment Email'/>
+                </div>
+              </div>
+              <div className="w-full lg:w-6/12 px-4">
+                <div className="relative w-full mb-3">
+                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                  Payment Phone no
+                  </label>
+                  <input type="number" name='payPhoneNo'  value={formData.payPhoneNo} onChange={handleChange} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder='+91 884933 90238'/>
                 </div>
               </div>
             </div>
@@ -113,7 +195,7 @@ function NGORegistration() {
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                   NGO Description
                   </label>
-                  <textarea type="text" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" placeholder='Write NGO Work Detail'></textarea>
+                  <textarea type="text" name='about'  value={formData.about} onChange={handleChange} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" placeholder='Write NGO Work Detail'></textarea>
                 </div>
               </div>
             </div>
@@ -122,7 +204,7 @@ function NGORegistration() {
             {/* for submit button */}
             <div className='mt-6'>
               
-              <button className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-6 py-2.5 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+              <button className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-6 py-2.5 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button" onClick={handleSubmit}>
                 Register
               </button>
             </div>
@@ -136,5 +218,4 @@ function NGORegistration() {
 }
 
 export default NGORegistration
-
 

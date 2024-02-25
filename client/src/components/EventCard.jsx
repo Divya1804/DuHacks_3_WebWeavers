@@ -12,22 +12,23 @@ function EventCard({data}) {
     <div className="single-job-items mb-30 mb-5 border">
         <div className="job-items">
             <div className='w-full h-40 '>
-                <img className='w-full h-full object-fill' src={data.companyLogo} alt="companylogo" />
+                <img className='w-full h-full object-fill' src={data.photoLink} alt="companylogo" />
             </div>
             <div className="job-tittle job-tittle2 mt-2">
                 <a href="#">
-                <h4>{"companyName"}</h4>
+                <h4>{data.eventName}</h4>
                 </a>
-                <h2>{"jobTitle"}</h2>
+                <h2>{data.type}</h2>
                 <ul className='text-primary/70 text-base flex flex-wrap gap-2 mt-4'>
-                    <li><span className='flex items-center gap-1'><FiMapPin/>{"jobLocation"}</span></li>
-                    <li><span className='flex items-center '><MdCurrencyRupee/>{"minPrice"}-{"maxPrice"}k</span></li>
-                    <li><span className='flex items-center gap-2'><FiCalendar/>{"postingDate"}</span></li>
+                    <li><span className='flex items-center gap-1'><FiMapPin/>{data.location}</span></li>
+                    <li><span className='flex items-center '><MdCurrencyRupee/>{data.raisedFund}-{data.requiredFund}k</span></li>
+                    <li><span className='flex items-center gap-2'><FiCalendar/>{data.endDate}</span></li>
                 </ul>
             </div>
         </div>
         <div className="items-link items-link2 f-right">
-            <Link to={`../event-detail/${data.id}`}><button>See more</button></Link>
+            {localStorage.getItem("mode")==='ngo'?<Link to={`../ngo-event-detail/${data.eventId}`}><button>See more</button></Link>:<Link to={`../event-detail/${data.eventId}`}><button>See more</button></Link>}
+            
         </div>
     </div>
   )

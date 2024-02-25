@@ -27,8 +27,8 @@ function Events() {
       try {
         const response = await axios.get('http://192.168.27.67:8000/api/home/');
         // console.log(response.data)
-        setEvents(response.data);
         setData(response.data);
+        setEvents(response.data);
         FilterData =  events;
         
       } catch (error) {
@@ -41,6 +41,7 @@ function Events() {
   },[])
   
   useEffect(()=>{
+    setData([]);
     FilterData = events.filter((x) => {
       if (
         (x.location.toLowerCase() === selectedCategory.location || selectedCategory.location === 'all') &&
@@ -51,8 +52,10 @@ function Events() {
       } else {
         return false;
       }
-    });   
+    });  
+    
     setData(FilterData);
+
   },[changeData])
   
 
@@ -66,17 +69,17 @@ function Events() {
   // console.log(selectedCategory)
 
   const itemsPerPage = 6;
-  const totalNoOfPages = Math.ceil(events.length /itemsPerPage);
+  const totalNoOfPages = Math.ceil(data.length /itemsPerPage);
  
   //filterning on so many things
   const filterData = (events) =>{
     return data.map((data,i) => {
       if( i <itemsPerPage *currentPage && i >= itemsPerPage*(currentPage-1) ){
-        return (<EventCard key={i} data={FilterData}/>)
+        return (<EventCard key={i} data={data}/>)
     }})
   }
 
-  const result =  filterData(events);
+  const result =  filterData(data);
 
   return (
     <>
@@ -99,7 +102,7 @@ function Events() {
                     <EventList result={result} />
                     <Pagination  pages={totalNoOfPages} setCurrentPage={setCurrentPage}/>
                 </div>
-                 <div className='flex justify-center mb-5'> <h3 className='text-black'>Page {currentPage} of {totalNoOfPages}</h3></div>
+                 <div className='flex justify-center mb-5'> <h3 className='text-black'>Page {currentPage} of {Math.ceil(data.length /itemsPerPage)}</h3></div>
                </div>
               
             ) : (

@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import about from "../../public/images/about.png"
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 function AboutUs() {
+    let navigate = useNavigate();
+    let user =  useSelector(state => state.user);
+      useEffect(() => {
+        
+        // Check if user is logged in after Redux state is updated
+      if ( !user.userId ) {
+          navigate('/login');
+        }
+      }, []);
   return (
     <section class="flex items-center py-10 bg-stone-100 xl:h-screen font-poppins dark:bg-gray-800 ">
     <div class="justify-center flex-1 max-w-6xl py-4 mx-auto lg:py-6 md:px-6">

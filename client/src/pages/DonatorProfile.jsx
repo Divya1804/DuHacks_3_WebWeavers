@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const DonatorProfile = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [index , setIndex] = useState(0);
+    let  user  = useSelector(state=>state.user);
+
 
     const navigate = useNavigate();
 
@@ -27,9 +30,17 @@ const DonatorProfile = () => {
 
     let paginationTotalNoOfPages ;
 
+    // console.log("id is here", id);
+    useEffect(() => {
+        
+        // Check if user is logged in after Redux state is updated
+      if ( !user.userId  || user.mode !== 'donator') {
+          navigate('/login');
+        }
+      }, []);
     useEffect(() => {
         // Example API call using fetch
-        fetch(`http://192.168.27.67:8000/api/donor/profile/1/${index}/4`)
+        fetch(`http://192.168.27.67:8000/api/donor/profile/${user.userId}/${index}/4`)
             .then(response => response.json())
             .then(data => {
                 setUserData(data)
@@ -146,4 +157,4 @@ const DonationItem = ({ eventName, ngoName, amount, date }) => {
             </div>
         </div>
     );
-};  
+};

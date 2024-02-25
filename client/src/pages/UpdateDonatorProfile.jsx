@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import photo from "../../public/images/eventregister.jpg";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function UpdateDonatorProfile() {
   const naviagte= useNavigate();
 
-  const {id} = useParams();
+  let  id  = useSelector(state=>state.user.userId);
+
+  console.log("id:  ", id)
   const [formData, setFormData] = useState({
     donorName: "",
     phoneNo: "",
@@ -15,6 +18,24 @@ function UpdateDonatorProfile() {
     address: "",
     photoLink: "",
   });
+
+  useEffect(()=>{
+    const fetchDetailOfDonator =  async()=>{
+      const response = await axios.get(`http://192.168.27.67:8000/api/donor/${id}`);
+
+      console.log(response)
+      setFormData({
+        donorName: response.data.donorName,
+        phoneNo: response.data.phoneNo,
+        occupation: response.data.occupation,
+        address: response.data.address,
+        photoLink: response.data.photoLink,
+      })
+    }
+
+    fetchDetailOfDonator();
+
+  },[]);
 
   const handleChange = (e) => {
     setFormData({

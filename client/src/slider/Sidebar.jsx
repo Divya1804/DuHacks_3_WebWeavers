@@ -1,36 +1,32 @@
-
 import React, { useEffect, useState } from 'react'
 import { IoFilterSharp } from "react-icons/io5";
 import {FiMapPin, FiSearch} from 'react-icons/fi'
 import InputField from '../components/InputField';
-
 
 function Sidebar({changeData,setChangeData,handleChange, setSelectedCategory, selectedCategory}) {
     
     const [searchBar1, setSearchBar1] =  useState(true);
     const [searchBar2, setSearchBar2] =  useState(true);
     
-    const handleSearchBar1 = () =>{
-
+    const handleSearchBar1 = () => {
       setSearchBar1((mode) => !mode);
     }
 
-    const handleRadio1 = (e) =>{
+    const handleRadio1 = (e) => {
         setSearchBar1(true);
     }
 
-    const handleSearchBar2 = () =>{
-
+    const handleSearchBar2 = () => {
       setSearchBar2((mode) => !mode);
     }
 
-    const handleRadio2= (e) =>{
+    const handleRadio2 = (e) => {
         setSearchBar2(true);
     }
-    const handleSubmit = ()=>{
+
+    const handleSubmit = () => {
       setChangeData(changeData^1);
     }
-
 
   return (     
         <div className='space-y-5'>

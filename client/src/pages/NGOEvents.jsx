@@ -4,6 +4,9 @@ import Sidebar from '../slider/Sidebar';
 import EventList from '../components/EventList';
 import Pagination from '../components/Pagination';
 import EventCard from '../components/EventCard';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 function NGOEvents() {
@@ -12,19 +15,38 @@ function NGOEvents() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage ,setCurrentPage] = useState(1);
 
-
-
+  let navigate = useNavigate();
+  let user =  useSelector(state => state.user);
+    useEffect(() => {
+      
+      // Check if user is logged in after Redux state is updated
+    if ( !user.userId  || user.mode !== 'ngo') {
+        navigate('/login');
+      }
+    }, []);
   useEffect(()=> {
-    setIsLoading(true);
-    fetch("jobs.json").then(res => res.json()).then(data => {
-      setEvents(data);
-      setIsLoading(false);
-    })
+    setIsLoading(false);
+    const fetchData = async () => {
+
+      try {
+        console.log("user id ",user.userId);
+      
+        const response = await axios.get(`http://192.168.27.67:8000/api/ngo/event/${user.userId}`);
+        
+        setEvents(response.data);
+        console.log("here",response.data);
+      } catch (error) {
+      
+        console.log(error);
+      }
+    };
+
+    fetchData();
   },[])
 
   //radio based filtering
   const handleChange = (event) => {
-    // console.log("*********",event.target.value)
+    // console.log("*",event.target.value)
     setSelectedCategory(event.target.value);
   };
 

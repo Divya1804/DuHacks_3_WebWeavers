@@ -14,4 +14,4 @@ function InputField({handleChange, value, title, name}) {
   )
 }
 
-export default InputField
+export default InputField;
