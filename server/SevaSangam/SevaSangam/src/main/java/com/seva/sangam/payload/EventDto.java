@@ -24,8 +24,8 @@ public class EventDto {
     private LocalDate endDate;  //change
 
     private String details;  //change
-    private Long gainedAmount;
-    private Long requiredAmount;  //change
+    private Long gainedAmount=0L;
+    private Long requiredAmount=0L;  //change
     private String photo;  //change
     private String type;  //change
     private String location;  //change

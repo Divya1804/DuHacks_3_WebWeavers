@@ -20,7 +20,7 @@ public class DonorDto {
     private Long phoneNo;
     private String occupation;
     private String address;
-    private Long amount;
+    private Long amount= 0L;
     private String photoLink;
     //    private List<EventDto> events;
     @JsonIgnore

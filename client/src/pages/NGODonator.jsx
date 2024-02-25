@@ -2,17 +2,37 @@ import React, { useEffect, useState } from 'react'
 import NGOsList from '../components/NGOsList';
 import Pagination from '../components/Pagination';
 import NGOCard from '../components/NGOCard';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function NGODonator() {
     const [NGOs, setNGOs] = useState([]);
     const [currentPage ,setCurrentPage] = useState(1);
 
     const itemsPerPage = 6;
-
+    let navigate = useNavigate();
+    let user =  useSelector(state => state.user);
+      useEffect(() => {
+        
+        // Check if user is logged in after Redux state is updated
+      if ( !user.userId  || user.mode !== 'donator') {
+          navigate('/login');
+        }
+      }, []);
     useEffect(()=>{
-       fetch('jobs.json').then(res =>res.json()).then(data =>
-         setNGOs(data)
-       );
+        const fetchData = async () => {
+            try {
+              const response = await axios.get(`http://192.168.27.67:8000/api/ngo/all`);
+              setNGOs(response.data);
+              console.log("here",response.data);
+            } catch (error) {
+            
+              console.log(error);
+            }
+          };
+      
+          fetchData();
     },[]);
 
     //Get current Items

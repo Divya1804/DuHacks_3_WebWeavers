@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -69,19 +70,20 @@ const Pagination = ({ pages, setCurrentPage }) => {
       setCurrentPage(currentButton);
     }, [currentButton, setCurrentPage]);
   
-    
+    // ... (existing code)
+  
     return (
     
-      <div className="pagination-container mb-5 mt-6 flex">
+      <div className="pagination-container mb-5 mt-6">
         {/* ... (existing code) */}
         <Link to="" 
-                  className={`mr-14 flex justify-center items-center text-black h-10 w-16 border border-gray-300 cursor-pointer transition duration-200 hover:bg-gray-300 ${currentButton === 1 ? 'disabled:' : ''}`}
+                  className={`flex justify-center items-center text-black h-10 w-10 border border-gray-300 cursor-pointer transition duration-200 hover:bg-gray-300 ${currentButton === 1 ? 'disabled:' : ''}`}
                   onClick={() => setCurrentButton(prev => (prev<=1 ? prev :prev-1))}
             >
                 Prev
         </Link>
 
-        {/* {
+        {
           arrOfCurrBtn.map((item, index) => (
             <Link
               to=""
@@ -95,9 +97,9 @@ const Pagination = ({ pages, setCurrentPage }) => {
             </Link>
           ))
         }
-        ... (existing code) */}
+        {/* ... (existing code) */}
         <Link to=""
-                  className={` ml-14 flex justify-center items-center text-black h-10 w-16  border border-gray-300 cursor-pointer transition duration-200 hover:bg-gray-300 ${currentButton === numberOfPages.length ? 'disabled:' : ''}`}
+                  className={`flex justify-center items-center text-black h-10 w-10 border border-gray-300 cursor-pointer transition duration-200 hover:bg-gray-300 ${currentButton === numberOfPages.length ? 'disabled:' : ''}`}
                   onClick={() => setCurrentButton(next => (next >= numberOfPages.length ? next : next+1))}
             >
                 Next

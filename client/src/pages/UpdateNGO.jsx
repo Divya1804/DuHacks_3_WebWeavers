@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 function UpdateNGO() {
   let navigate = useNavigate();
-  let { id } = useParams();
+  let  id  = useSelector(state=>state.user.userId);
+  
   const [formData, setFormData] = useState({
     ngoName: "",
     slogan: "",
@@ -14,9 +17,30 @@ function UpdateNGO() {
     ngoPhoneNo: "",
     merchantId: "",
     secretKey: "",
-    payEmail: "",
-    payPhoneNo: "",
   });
+
+  useEffect(()=>{
+    console.log("id",id);
+     const fetchDetail=  async ()=>{
+        const response = await axios.get(`http://192.168.27.67:8000/api/ngo/${id}`);
+
+        console.log("first response ", response);
+        setFormData({
+             ngoName: response.data.ngoName,         
+            slogan: response.data.slogan,
+            location: response.data.location,
+            certiLink:response.data.certiLink,
+            logoLink: response.data.logoLink,
+            about: response.data.about,
+            ngoPhoneNo: response.data.ngoPhoneNo,
+            merchantId: response.data.merchantId || '',
+            secretKey: response.data.secretKey || '',
+        })
+     }
+
+     fetchDetail();
+
+  },[]);
 
   // Handler for input changes
   const handleChange = (e) => {
@@ -34,10 +58,10 @@ function UpdateNGO() {
       console.log(formData);
       // Submit form data using Axios post request
       const response = await axios.put(
-        `http://192.168.27.67:8000/api/ngo/${id}`,
+       `http://192.168.27.67:8000/api/ngo/${id}`,
         formData
       );
-      console.log("Registration successful:", response.data);
+      console.log("Update successfully:", response.data);
       // Clear form fields after successful submission if needed
       setFormData({
         ngoName: "",
@@ -49,13 +73,11 @@ function UpdateNGO() {
         ngoPhoneNo: "",
         merchantId: "",
         secretKey: "",
-        payEmail: "",
-        payPhoneNo: "",
       });
 
       navigate("/");
     } catch (error) {
-      console.error("Registration failed:", error);
+      console.error("updatation failed:", error);
     }
   };
 
@@ -240,7 +262,6 @@ function UpdateNGO() {
                     />
                   </div>
                 </div>
-               
               </div>
 
               <hr className="mt-6 border-b-1 border-blueGray-300" />

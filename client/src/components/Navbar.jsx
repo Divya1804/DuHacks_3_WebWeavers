@@ -3,14 +3,30 @@ import logo from '/images/homelogo1.png'
 import logo1 from '/images/logo.png'
 import { NavLink ,Link, useNavigate} from 'react-router-dom';
 import { FaBarsStaggered, FaXmark } from 'react-icons/fa6';
+import { useSelect } from '@material-tailwind/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeUser } from '../redux/userSlicer';
 
-const Navbar = () => {
+
+function Navbar() {
+  const user = useSelector(state=>state.user);
+  const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isMedium, setIsMedium] = useState(window.innerWidth <= 1024);
   const [activeNavLink, setActiveNavLink] = useState(null);
 
   const navigate = useNavigate();
+  let i =0;
+
+
+
+   const handleLogout = ()=>{
+    console.log(user);
+    console.log("after logout");
+    dispatch(removeUser());
+    navigate('/login');
+   }
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -19,7 +35,7 @@ const Navbar = () => {
         setIsMenuOpen(false);
       }
     };
-
+   
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -35,14 +51,31 @@ const Navbar = () => {
     setActiveNavLink(path);
   };
 
-  const navItems = [
-    { path: '/', title: 'Home' },
-    { path: '/events', title: 'Events' },
-    { path: '/ngo-donator', title: 'NGOs' },
-    { path: '/donator-profile', title: 'Donator Profile' },
-    { path: '/aboutus', title: 'About us' },
-  ];
 
+  let navItems=[];
+  
+  console.log("mode is", localStorage.getItem("mode"));
+  if(localStorage.getItem("mode")==='ngo'){
+    navItems = [
+      { path: '/ngo', title: 'Home' },
+      { path: '/ngo-events', title: 'Events' },
+      {path:'/event-registration',title:'Post Event'},
+      { path: '/aboutus', title: 'About us' },
+      
+    ];
+  }
+  else if(localStorage.getItem("mode")==='donator'){
+    navItems = [
+      { path: '/', title: 'Home' },
+      { path: '/events', title: 'Events' },
+      { path: '/ngo-donator', title: 'NGOs' },
+      { path: '/aboutus', title: 'About us' },
+      {path:'/donator-profile',title:'Profile'}
+    ];
+  }
+  if(!navItems){
+    return <></>
+  }
   return (
     <div className='relative '>
       {/* Background Image */}
@@ -60,25 +93,28 @@ const Navbar = () => {
           {/* navitems */}
           <div className='flex items-center justify-end space-x-5'>
             <ul className={`sm:flex items-center space-x-10 ${isMedium ? 'hidden' : ''} ml-auto`}>
-              {navItems.map(({ path, title }) => (
-                <li key={path} className='text-base font-semibold hover:text-primary hover:text-blue-500 '>
+           
+              {navItems.map(({ path, title},index) => (
+                
+                <li key={path}  className={`text-base font-semibold hover:text-primary hover:text-blue-500 ${index}`}>
                   <NavLink 
-                      to={path}
-                      activeClassName='active'  
-                      onClick={() => handleNavLinkClick(path)} 
-                      style={{ borderBottom: activeNavLink === path ? '4px solid #007BFF' : 'none' , paddingBottom: '4px'}} >
+                   to={path}
+                   activeClassName='active'  
+                   onClick={() => handleNavLinkClick(path)} 
+                   style={{ borderBottom: activeNavLink === path ? '4px solid #007BFF' : 'none' , paddingBottom: '4px'}} >
                       {title}
+                     
                   </NavLink>
                 </li>
               ))}
-              <Link to={`/login`}><button   className={`font-semibold px-5 py-1 border border-primary hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in rounded ${
+            
+               <button onClick={handleLogout}  className={`font-semibold px-5 py-1 border border-primary hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in rounded ${
                   isMedium ? 'hidden' : ''
-                }`}>Login</button></Link>
-              
+                }`}>Logout</button>
             </ul>
 
             {/* Mobile menu */}
-            <div className='md:hidden lg:hidden ml-auto'>
+            <div className='md:hidden ml-auto'>
               <button className='' onClick={handleMenuToggler} style={{marginLeft:"190px"}}>
                 {isMenuOpen ? (
                   <FaXmark className='w-7 h-7 text-primary' />
@@ -99,20 +135,22 @@ const Navbar = () => {
       >
         <ul>
           {navItems.map(({ path, title }) => (
-            <li key={path} className='text-base font-semibold hover:text-primary hover:text-blue-500 py-1'>
-              <NavLink
-                 to={path}
-                 activeClassName='active'  
-                 onClick={() => handleNavLinkClick(path)} 
-                 style={{ borderBottom: activeNavLink === path ? '3px solid #007BFF' : 'none' , paddingBottom: '2px'}}>
+            <li key={path}  className='text-base font-semibold hover:text-primary hover:text-blue-500 py-1'>
+              <NavLink to={path} className={({ isActive }) => (isActive ? 'active' : '')}>
                 {title}
               </NavLink>
             </li>
           ))}
           <li>
-              <NavLink to={`/login`} className='text-base font-semibold hover:text-primary hover:text-blue-500 py-1'>
-                  Login
-              </NavLink>
+             <div>
+                <label 
+                   htmlFor='logout' 
+                   className='text-base font-semibold hover:text-primary hover:text-blue-500 py-1'
+                   onClick={handleLogout}
+                >
+                  Logout
+                </label>
+             </div>
           </li>
         
         </ul>
@@ -123,4 +161,4 @@ const Navbar = () => {
   );
 }
 
-export default Navbar
+export default Navbar;
