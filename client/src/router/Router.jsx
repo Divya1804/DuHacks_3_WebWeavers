@@ -10,58 +10,61 @@ import Registration from '../pages/Registration'
 import NGORegistration from '../pages/NGORegistration'
 import EventRegistration from '../pages/EventRegistration'
 import DonatorRegistration from '../pages/DonatorRegistration';
+import NGODetail from '../pages/NGODetail';
 
 const router = createBrowserRouter([
     {
-        path:'/',
-        element:<App/>,
-        children:[
+        path: '/',
+        element: <App />,
+        children: [
             {
-                path:'/',
-                element:<Home/>
+                path: '/',
+                element: <Home />
             },
             {
-                path:'/events',
-                element:<Events/>
+                path: '/events',
+                element: <Events />
             },
             {
-                path:'/ngo-donator',
-                element:<NGODonator/>
+                path: '/ngo-donator',
+                element: <NGODonator />
             },
             {
-                path:"/donator-profile",
-                element:<DonatorProfile/>
+                path: "/donator-profile",
+                element: <DonatorProfile />
             },
-           
-           
+
+
         ]
     },
     {
-        path:"/login",
-        element:<Login/>
+        path: "/login",
+        element: <Login />
     },
     {
-        path:"/register",
-        element:<Registration/>
+        path: "/register",
+        element: <Registration />
     },
     {
-        path:'/aboutUs',
-        element:<AboutUs/>
+        path: '/aboutUs',
+        element: <AboutUs />
 
     },
     {
-        path:"/ngo-registration",
-        element:<NGORegistration/>
+        path: "/ngo-registration",
+        element: <NGORegistration />
     },
     {
-        path:"/event-registration",
-        element:<EventRegistration/>
+        path: "/event-registration",
+        element: <EventRegistration />
     },
     {
-       
-            path:"/donator-registration",
-            element:<DonatorRegistration/>
-      
+        path: "/donator-registration",
+        element: <DonatorRegistration />
+    },
+    {
+        path: "/ngo-detail/:id",
+        element: <NGODetail />
     }
 ])
 export default router;
