@@ -17,4 +17,6 @@ public interface NgoServices {
     NgoAdminDto loginNgoAdmin(String userName, String password);
 
     List<AllNgoInDonor> getAllNgo();
+
+    NgoAdminDto getNgoById(Long ngoId);
 }

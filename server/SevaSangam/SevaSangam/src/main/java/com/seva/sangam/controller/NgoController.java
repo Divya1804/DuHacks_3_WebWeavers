@@ -48,6 +48,12 @@ public class NgoController {
         return new ResponseEntity<HomeNgo>(ngoServices.homeNgo(ngoId), HttpStatus.OK);
     }
 
+    @GetMapping("/{ngoId}")
+    private ResponseEntity<NgoAdminDto> getNgoById(@PathVariable("ngoId") Long ngoId){
+        NgoAdminDto dto = ngoServices.getNgoById(ngoId);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
     @GetMapping("/event/{ngoId}")
     private ResponseEntity<?> getAllEventByNgoId(@PathVariable("ngoId") Long ngoId)
     {

@@ -274,4 +274,11 @@ public class NgoServiceImpl implements NgoServices {
         }
         return allList;
     }
+
+    @Override
+    public NgoAdminDto getNgoById(Long ngoId) {
+        NgoAdmin admin = ngoRepo.findById(ngoId).orElseThrow(() -> new ResourceNotFound("Ngo" , "Id", ngoId));
+
+        return model.map(admin, NgoAdminDto.class);
+    }
 }
